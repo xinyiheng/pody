@@ -92,7 +92,7 @@ class PodcastGenerator:
             valid_summaries = [s for s in summaries if s.get('summary') and s['summary'].strip()]
             
             if not valid_summaries:
-                print("⚠️ 没有有效的文章内容可以讨论")
+                print("没有有效的文章内容可以讨论")
                 return ""
             
             article_count = len(valid_summaries)
@@ -107,16 +107,17 @@ class PodcastGenerator:
 {input_text}
 
 要求：
-1. 直接进入主题，不要加任何开场白或问候语。
+1. 每篇文章开头说明来源，例如"来自磨铁书讯的文章报道"
 2. 每篇文章至少讨论300字，重点包含：
    - 核心观点和关键数据
    - 深层分析和影响
    - 行业意义
-3. 文章之间用"下一篇"或"另一篇"作为过渡。
-4. 语言要简洁专业，避免口语化表达。
-5. 不要加任何结束语或告别语。
+3. 文章之间用自然的过渡，不要使用"下一篇"这样的表述
+4. 语言要简洁专业，避免口语化表达
+5. 不要加任何开场白、结束语或标点符号
+6. 必须处理所有提供的文章，不能遗漏
 
-请确保输出的内容严格遵循以上格式，直接进入主题，保持专业性。"""
+请直接输出播报内容，保持专业性。"""
 
             headers = {
                 "Authorization": f"Bearer {self.api_key}",
@@ -132,34 +133,34 @@ class PodcastGenerator:
                         "content": "你是出版电台的主播，擅长制作生动的播报内容。"
                     },
                     {"role": "user", "content": prompt}
-                ]
+                ],
+                "temperature": 0.7,   # 适当降低随机性
+                "top_p": 0.9         # 保持输出质量
             }
 
             response = requests.post(
                 self.api_base,
                 headers=headers,
                 json=payload,
-                timeout=60
+                timeout=180  # 进一步增加超时时间到3分钟
             )
-            
-            print(f"完整请求头: {headers}")  # 不要在生产环境打印
-            print(f"响应状态码: {response.status_code}")
-            print(f"响应内容: {response.text}")
             
             response.raise_for_status()
             script = response.json()["choices"][0]["message"]["content"]
             
-            # 修改文件保存逻辑
+            # 验证是否包含所有文章
+            for summary in valid_summaries:
+                if summary['source'] not in script:
+                    print(f"警告：未找到来源 '{summary['source']}' 的内容")
+            
+            # 保存文稿
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             podcast_dir = os.path.join(self.podcasts_dir, timestamp)
             if not os.path.exists(podcast_dir):
                 os.makedirs(podcast_dir)
             
-            # 保存文稿
             script_file = os.path.join(podcast_dir, 'script.txt')
             with open(script_file, 'w', encoding='utf-8') as f:
-                f.write("出版电台播报稿\n")
-                f.write("=" * 80 + "\n\n")
                 f.write(script)
             
             print(f"\n播报稿已生成并保存到: {script_file}")
