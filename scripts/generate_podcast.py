@@ -71,17 +71,21 @@ class PodcastGenerator:
             if os.path.exists(index_file):
                 with open(index_file, 'r', encoding='utf-8') as f:
                     index = json.load(f)
+                    print(f"当前索引包含 {len(index['podcasts'])} 个播客")
             else:
                 index = {"podcasts": []}
+                print("创建新的索引文件")
             
             # 将新播客添加到列表开头
             index["podcasts"].insert(0, podcast_data)
+            print(f"添加新播客: {podcast_data['id']}")
             
             # 保存更新后的索引
             with open(index_file, 'w', encoding='utf-8') as f:
                 json.dump(index, f, ensure_ascii=False, indent=2)
             
             print(f"✅ 索引文件已更新: {index_file}")
+            print(f"现在索引包含 {len(index['podcasts'])} 个播客")
             
         except Exception as e:
             print(f"更新索引文件失败: {e}")
@@ -449,7 +453,7 @@ class PodcastGenerator:
 
 async def main():
     generator = PodcastGenerator()
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # 在开始时就生成时间戳
     
     # 1. 获取文章
     articles = generator.fetch_rss_articles()
@@ -473,7 +477,7 @@ async def main():
         print("生成播报稿失败")
         return
     
-    # 确保播客目录存在
+    # 确保使用同一个时间戳创建目录
     podcast_dir = os.path.join(generator.podcasts_dir, timestamp)
     if not os.path.exists(podcast_dir):
         os.makedirs(podcast_dir)
@@ -483,18 +487,15 @@ async def main():
     with open(script_file, 'w', encoding='utf-8') as f:
         f.write(script)
     
-    # 4. 生成音频
+    # 4. 生成音频 - 传入相同的时间戳
     audio_file = await generator.generate_audio(script, timestamp)
-    if not audio_file:
-        print("音频生成失败")
-        return
     
-    # 更新索引文件
+    # 更新索引文件 - 使用相同的时间戳
     podcast_data = {
         'id': timestamp,
         'date': datetime.now().strftime('%Y-%m-%d'),
         'title': f"出版电台播报 {datetime.now().strftime('%Y年%m月%d日')}",
-        'summary': summaries[0]['title'] if summaries else "",  # 使用第一篇文章标题作为概要
+        'summary': summaries[0]['title'] if summaries else "",
         'audio_path': f'/podcasts/{timestamp}/podcast.mp3',
         'script_path': f'/podcasts/{timestamp}/script.txt'
     }
