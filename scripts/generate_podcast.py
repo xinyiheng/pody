@@ -63,26 +63,26 @@ class PodcastGenerator:
         except Exception as e:
             print(f"保存缓存失败: {e}")
 
-    def update_podcast_index(self, podcast_data):
+    def update_podcast_index(self, podcast_data: Dict) -> None:
         """更新播客索引文件"""
+        index_file = os.path.join(self.web_dir, 'podcast_index.json')
+        
         try:
-            # 读取现有索引
-            if os.path.exists(self.index_file):
-                with open(self.index_file, 'r', encoding='utf-8') as f:
+            if os.path.exists(index_file):
+                with open(index_file, 'r', encoding='utf-8') as f:
                     index = json.load(f)
             else:
-                index = {'podcasts': []}
-
-            # 添加新播客信息
-            index['podcasts'].insert(0, podcast_data)
+                index = {"podcasts": []}
             
-            # 只保留最近30期
-            index['podcasts'] = index['podcasts'][:30]
+            # 将新播客添加到列表开头
+            index["podcasts"].insert(0, podcast_data)
             
             # 保存更新后的索引
-            with open(self.index_file, 'w', encoding='utf-8') as f:
+            with open(index_file, 'w', encoding='utf-8') as f:
                 json.dump(index, f, ensure_ascii=False, indent=2)
-                
+            
+            print(f"✅ 索引文件已更新: {index_file}")
+            
         except Exception as e:
             print(f"更新索引文件失败: {e}")
 
@@ -101,23 +101,34 @@ class PodcastGenerator:
                 for i, s in enumerate(valid_summaries)
             ])
             
-            prompt = f"""请将以下{article_count}篇文章转换为播报稿。
+            prompt = f"""你是一位专业的播客内容创作者，擅长将多篇文章整合成自然流畅的单人口播稿件。请根据以下{article_count}篇文章，生成一期出版行业新闻播报。
 
 内容材料（共{article_count}篇文章）：
 {input_text}
 
-要求：
-1. 每篇文章开头必须使用其真实来源，例如"据中国新闻出版广电报报道"、"来自磨铁书讯的消息"等
-2. 每篇文章至少讨论300字，重点包含：
-   - 核心观点和关键数据
-   - 深层分析和影响
-   - 行业意义
-3. 文章之间用自然的过渡，不要使用"下一篇"这样的表述
-4. 语言要简洁专业，避免口语化表达
-5. 不要加任何开场白、结束语或标点符号
-6. 必须处理所有提供的文章，不能遗漏
+具体要求：
 
-请直接输出播报内容，保持专业性。"""
+1. 内容组织
+   - 按主题（如文学、童书、商业、数字出版等）对文章进行分类整理
+   - 相似主题的内容放在一起讨论，使用自然的过渡句连接
+   - 每个主题下的内容要突出重点，展现深度
+
+2. 来源引用
+   - 每篇文章必须准确提及其真实来源
+   - 来源引用要自然融入语句，避免生硬堆砌
+
+3. 语言风格
+   - 保持专业性和权威感，同时语言要生动易懂
+   - 使用广播新闻的语气和节奏
+   - 避免过于口语化的表达
+
+4. 结构要求
+   - 不要添加开场白和结束语
+   - 每篇文章讨论篇幅300字左右
+   - 确保覆盖所有文章的核心内容
+   - 突出行业影响和深层分析
+
+请直接输出播报内容，以广播新闻的专业风格呈现。"""
 
             headers = {
                 "Authorization": f"Bearer {self.api_key}",
@@ -130,12 +141,12 @@ class PodcastGenerator:
                 "messages": [
                     {
                         "role": "system",
-                        "content": "你是出版电台的主播，擅长制作生动的播报内容。"
+                        "content": "你是出版电台的专业主播，擅长制作新闻播报内容。"
                     },
                     {"role": "user", "content": prompt}
                 ],
-                "temperature": 0.7,   # 适当降低随机性
-                "top_p": 0.9         # 保持输出质量
+                "temperature": 0.7,
+                "top_p": 0.9
             }
 
             response = requests.post(
