@@ -77,7 +77,7 @@ class PodcastGenerator:
             index['podcasts'].insert(0, podcast_data)
             
             # 只保留最近30期
-            index['podcasts'] = index['podcasts'][:30]
+            index['podcasts'] = index['podcasts'][:50]
             
             # 保存更新后的索引
             with open(self.index_file, 'w', encoding='utf-8') as f:
@@ -107,7 +107,7 @@ class PodcastGenerator:
 {input_text}
 
 要求：
-1. 每篇文章开头说明来源，例如"来自磨铁书讯的文章报道"
+1. 开头先介绍文章讨论的主题，说明文章来源
 2. 每篇文章至少讨论300字，重点包含：
    - 核心观点和关键数据
    - 深层分析和影响
@@ -134,8 +134,8 @@ class PodcastGenerator:
                     },
                     {"role": "user", "content": prompt}
                 ],
-                "temperature": 0.7,   # 适当降低随机性
-                "top_p": 0.9         # 保持输出质量
+                "temperature": 0.7,
+                "top_p": 0.9
             }
 
             response = requests.post(
@@ -406,7 +406,7 @@ class PodcastGenerator:
                     self.api_base,
                     headers=headers,
                     json={
-                        "model": "anthropic/claude-3-opus-20240229",
+                        "model": "qwen/qwen-turbo",
                         "messages": [
                             {"role": "user", "content": f"请将这篇文章总结为适合播客的内容，语气要自然流畅，要包含文章的主要观点和有趣的细节。\n\n文章标题：{article['title']}\n\n作者：{article['author']}\n\n内容：{article['content']}"}
                         ]
