@@ -4,15 +4,13 @@ from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 import time
 import json
-import edge_tts
 import asyncio
 import os
-from typing import List, Dict
+from typing import List, Dict, Literal, Annotated
 import shutil
 import httpx
 import ormsgpack
 from pydantic import BaseModel, conint
-from typing import Literal, Annotated
 
 class ServeTTSRequest(BaseModel):
     text: str
