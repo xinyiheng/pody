@@ -9,19 +9,6 @@ import asyncio
 import os
 from typing import List, Dict
 import shutil
-import httpx
-import ormsgpack
-from pydantic import BaseModel, conint
-from typing import Literal, Annotated
-
-class ServeTTSRequest(BaseModel):
-    text: str
-    reference_id: str = "57eab548c7ed4ddc974c4c153cb015b2"
-    chunk_length: Annotated[int, conint(ge=100, le=300, strict=True)] = 200
-    format: Literal["wav", "pcm", "mp3"] = "mp3"
-    mp3_bitrate: Literal[64, 128, 192] = 192
-    normalize: bool = True
-    latency: Literal["normal", "balanced"] = "normal"
 
 class PodcastGenerator:
     def __init__(self):
@@ -37,9 +24,6 @@ class PodcastGenerator:
         self.public_dir = os.path.join(self.web_dir, 'public')
         self.podcasts_dir = os.path.join(self.public_dir, 'podcasts')
         self.index_file = os.path.join(self.public_dir, 'podcast_index.json')
-        self.fish_api_key = os.environ.get('FISH_API_KEY')
-        if not self.fish_api_key:
-            raise ValueError("FISH_API_KEY environment variable is not set")
         
         # 确保必要的目录存在
         for directory in [self.web_dir, self.public_dir, self.podcasts_dir]:
@@ -189,37 +173,22 @@ class PodcastGenerator:
             return ""
 
     async def generate_audio(self, text: str, timestamp: str) -> str:
-        """使用 Fish Audio TTS 生成音频"""
+        """使用Edge TTS生成音频"""
         print("开始生成音频...")
         try:
+            # 确保目录存在
             podcast_dir = os.path.join(self.podcasts_dir, timestamp)
             if not os.path.exists(podcast_dir):
                 os.makedirs(podcast_dir)
             
-            request = ServeTTSRequest(
-                text=text,
-                reference_id="57eab548c7ed4ddc974c4c153cb015b2",
-                mp3_bitrate=192,
-                normalize=True,
-                latency="normal"
+            communicate = edge_tts.Communicate(
+                text, 
+                "zh-CN-XiaoxiaoNeural",
+                rate="+50%"
             )
-
-            audio_file = os.path.join(podcast_dir, 'podcast.mp3')
             
-            async with httpx.AsyncClient() as client:
-                async with client.stream(
-                    "POST",
-                    "https://api.fish.audio/v1/tts",
-                    content=ormsgpack.packb(request, option=ormsgpack.OPT_SERIALIZE_PYDANTIC),
-                    headers={
-                        "authorization": f"Bearer {self.fish_api_key}",
-                        "content-type": "application/msgpack",
-                    },
-                    timeout=None,
-                ) as response:
-                    with open(audio_file, 'wb') as f:
-                        async for chunk in response.aiter_bytes():
-                            f.write(chunk)
+            audio_file = os.path.join(podcast_dir, 'podcast.mp3')
+            await communicate.save(audio_file)
             
             print(f"✅ 音频文件已保存到: {audio_file}")
             return audio_file

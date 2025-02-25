@@ -1,5 +1,7 @@
 feedparser
 requests
 beautifulsoup4
-edge-tts
-aiohttp 
+aiohttp
+httpx
+ormsgpack
+pydantic 
