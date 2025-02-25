@@ -23,7 +23,7 @@ class PodcastGenerator:
         self.web_dir = 'web'
         self.public_dir = os.path.join(self.web_dir, 'public')
         self.podcasts_dir = os.path.join(self.public_dir, 'podcasts')
-        self.index_file = os.path.join(self.web_dir, 'podcast_index.json')
+        self.index_file = os.path.join(self.public_dir, 'podcast_index.json')
         
         # 确保必要的目录存在
         for directory in [self.web_dir, self.public_dir, self.podcasts_dir]:
@@ -63,37 +63,28 @@ class PodcastGenerator:
         except Exception as e:
             print(f"保存缓存失败: {e}")
 
-    def update_podcast_index(self, podcast_data: Dict) -> None:
+    def update_podcast_index(self, podcast_data):
         """更新播客索引文件"""
         try:
-            # 确保目录存在
-            os.makedirs(os.path.dirname(self.index_file), exist_ok=True)
-            
+            # 读取现有索引
             if os.path.exists(self.index_file):
                 with open(self.index_file, 'r', encoding='utf-8') as f:
                     index = json.load(f)
-                    print(f"当前索引包含 {len(index['podcasts'])} 个播客")
-                    print(f"索引文件位置: {self.index_file}")
             else:
-                index = {"podcasts": []}
-                print(f"创建新的索引文件: {self.index_file}")
+                index = {'podcasts': []}
+
+            # 添加新播客信息
+            index['podcasts'].insert(0, podcast_data)
             
-            # 将新播客添加到列表开头
-            index["podcasts"].insert(0, podcast_data)
-            print(f"添加新播客: {podcast_data['id']}")
-            print(f"音频文件路径: {os.path.join(self.podcasts_dir, podcast_data['id'], 'podcast.mp3')}")
+            # 只保留最近30期
+            index['podcasts'] = index['podcasts'][:30]
             
             # 保存更新后的索引
             with open(self.index_file, 'w', encoding='utf-8') as f:
                 json.dump(index, f, ensure_ascii=False, indent=2)
-            
-            print(f"✅ 索引文件已更新: {self.index_file}")
-            print(f"现在索引包含 {len(index['podcasts'])} 个播客")
-            
+                
         except Exception as e:
             print(f"更新索引文件失败: {e}")
-            import traceback
-            print(traceback.format_exc())
 
     async def generate_broadcast_script(self, summaries: List[Dict]) -> str:
         """生成单人播报稿"""
@@ -110,34 +101,23 @@ class PodcastGenerator:
                 for i, s in enumerate(valid_summaries)
             ])
             
-            prompt = f"""你是一位专业的播客内容创作者，擅长将多篇文章整合成自然流畅的单人口播稿件。请根据以下{article_count}篇文章，生成一期出版行业新闻播报。
+            prompt = f"""请将以下{article_count}篇文章转换为播报稿。
 
 内容材料（共{article_count}篇文章）：
 {input_text}
 
-具体要求：
+要求：
+1. 每篇文章开头说明来源，例如"来自磨铁书讯的文章报道"
+2. 每篇文章至少讨论300字，重点包含：
+   - 核心观点和关键数据
+   - 深层分析和影响
+   - 行业意义
+3. 文章之间用自然的过渡，不要使用"下一篇"这样的表述
+4. 语言要简洁专业，避免口语化表达
+5. 不要加任何开场白、结束语或标点符号
+6. 必须处理所有提供的文章，不能遗漏
 
-1. 内容组织
-   - 按主题（如文学、童书、商业、数字出版等）对文章进行分类整理
-   - 相似主题的内容放在一起讨论，使用自然的过渡句连接
-   - 每个主题下的内容要突出重点，展现深度
-
-2. 来源引用
-   - 每篇文章必须准确提及其真实来源
-   - 来源引用要自然融入语句，避免生硬堆砌
-
-3. 语言风格
-   - 保持专业性和权威感，同时语言要生动易懂
-   - 使用广播新闻的语气和节奏
-   - 避免过于口语化的表达
-
-4. 结构要求
-   - 不要添加开场白和结束语
-   - 每篇文章讨论篇幅300字左右
-   - 确保覆盖所有文章的核心内容
-   - 突出行业影响和深层分析
-
-请直接输出播报内容，以广播新闻的专业风格呈现。"""
+请直接输出播报内容，保持专业性。"""
 
             headers = {
                 "Authorization": f"Bearer {self.api_key}",
@@ -150,12 +130,12 @@ class PodcastGenerator:
                 "messages": [
                     {
                         "role": "system",
-                        "content": "你是出版电台的专业主播，擅长制作新闻播报内容。"
+                        "content": "你是出版电台的主播，擅长制作生动的播报内容。"
                     },
                     {"role": "user", "content": prompt}
                 ],
-                "temperature": 0.7,
-                "top_p": 0.9
+                "temperature": 0.7,   # 适当降低随机性
+                "top_p": 0.9         # 保持输出质量
             }
 
             response = requests.post(
@@ -482,7 +462,7 @@ async def main():
         print("生成播报稿失败")
         return
     
-    # 确保使用同一个时间戳创建目录
+    # 确保播客目录存在
     podcast_dir = os.path.join(generator.podcasts_dir, timestamp)
     if not os.path.exists(podcast_dir):
         os.makedirs(podcast_dir)
@@ -492,40 +472,22 @@ async def main():
     with open(script_file, 'w', encoding='utf-8') as f:
         f.write(script)
     
-    # 4. 生成音频 - 传入相同的时间戳
+    # 4. 生成音频
     audio_file = await generator.generate_audio(script, timestamp)
+    if not audio_file:
+        print("音频生成失败")
+        return
     
-    # 更新索引文件 - 使用相同的时间戳
+    # 更新索引文件
     podcast_data = {
         'id': timestamp,
         'date': datetime.now().strftime('%Y-%m-%d'),
         'title': f"出版电台播报 {datetime.now().strftime('%Y年%m月%d日')}",
-        'summary': summaries[0]['title'] if summaries else "",
+        'summary': summaries[0]['title'] if summaries else "",  # 使用第一篇文章标题作为概要
         'audio_path': f'/podcasts/{timestamp}/podcast.mp3',
         'script_path': f'/podcasts/{timestamp}/script.txt'
     }
     generator.update_podcast_index(podcast_data)
-    
-    # 添加文件检查
-    script_file = os.path.join(podcast_dir, 'script.txt')
-    audio_file = os.path.join(podcast_dir, 'podcast.mp3')
-    index_file = generator.index_file
-    
-    print("\n文件检查:")
-    print(f"播客目录: {os.path.exists(podcast_dir)}")
-    print(f"文稿文件: {os.path.exists(script_file)}")
-    print(f"音频文件: {os.path.exists(audio_file)}")
-    print(f"索引文件: {os.path.exists(index_file)}")
-    
-    # 打印目录内容
-    if os.path.exists(generator.web_dir):
-        print("\n网站目录内容:")
-        for root, dirs, files in os.walk(generator.web_dir):
-            print(f"\n{root}:")
-            for d in dirs:
-                print(f"  📁 {d}")
-            for f in files:
-                print(f"  📄 {f}")
     
     print("\n处理完成!")
     print(f"文件已保存在: {os.path.join(generator.podcasts_dir, timestamp)}")
