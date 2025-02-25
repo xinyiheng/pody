@@ -29,6 +29,16 @@ jobs:
       env:
         API_KEY: ${{ secrets.API_KEY }}
     
+    - name: Check API Key
+      run: |
+        if [ -n "$API_KEY" ]; then
+          echo "API Key is set (showing first 10 characters): ${API_KEY:0:10}..."
+        else
+          echo "API Key is not set!"
+        fi
+      env:
+        API_KEY: ${{ secrets.API_KEY }}
+    
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:

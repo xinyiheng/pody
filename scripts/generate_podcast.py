@@ -378,31 +378,37 @@ class PodcastGenerator:
             print(traceback.format_exc())
             return []
 
-    def summarize_with_ai(self, articles):
-        """使用AI总结文章"""
-        print("开始AI总结...")
+    def summarize_with_ai(self, articles: List[Dict]) -> List[Dict]:
         summaries = []
-        
         for article in articles:
             try:
+                print(f"\n正在总结文章: {article['title']}")
+                headers = {
+                    "Authorization": f"Bearer {self.api_key}",
+                    "Content-Type": "application/json"
+                }
+                
+                # 打印请求信息（注意隐藏完整 API key）
+                print(f"API Key 前缀: {self.api_key[:10]}...")
+                print(f"请求 URL: {self.api_base}")
+                
                 response = requests.post(
                     self.api_base,
-                    headers={
-                        "Authorization": f"Bearer {self.api_key}",
-                        "Content-Type": "application/json"
-                    },
+                    headers=headers,
                     json={
-                        "model": "qwen/qwen-turbo",
+                        "model": "anthropic/claude-3-opus-20240229",
                         "messages": [
-                            {
-                                "role": "system",
-                                "content": "你是出版电台的主播，擅长制作生动的播报内容。"
-                            },
                             {"role": "user", "content": f"请将这篇文章总结为适合播客的内容，语气要自然流畅，要包含文章的主要观点和有趣的细节。\n\n文章标题：{article['title']}\n\n作者：{article['author']}\n\n内容：{article['content']}"}
                         ]
                     },
                     timeout=60
                 )
+                
+                # 打印响应状态和内容
+                print(f"响应状态码: {response.status_code}")
+                if response.status_code != 200:
+                    print(f"错误响应: {response.text}")
+                
                 response.raise_for_status()
                 summary = {
                     'title': article['title'],
@@ -415,7 +421,7 @@ class PodcastGenerator:
                 # 避免频繁请求
                 time.sleep(2)
             except Exception as e:
-                print(f"AI总结失败: {e}")
+                print(f"AI总结失败: {str(e)}")
                 continue
         
         return summaries
