@@ -23,7 +23,7 @@ class PodcastGenerator:
         self.web_dir = 'web'
         self.public_dir = os.path.join(self.web_dir, 'public')
         self.podcasts_dir = os.path.join(self.public_dir, 'podcasts')
-        self.index_file = os.path.join(self.public_dir, 'podcast_index.json')
+        self.index_file = os.path.join(self.web_dir, 'podcast_index.json')
         
         # 确保必要的目录存在
         for directory in [self.web_dir, self.public_dir, self.podcasts_dir]:
@@ -65,30 +65,35 @@ class PodcastGenerator:
 
     def update_podcast_index(self, podcast_data: Dict) -> None:
         """更新播客索引文件"""
-        index_file = os.path.join(self.web_dir, 'podcast_index.json')
-        
         try:
-            if os.path.exists(index_file):
-                with open(index_file, 'r', encoding='utf-8') as f:
+            # 确保目录存在
+            os.makedirs(os.path.dirname(self.index_file), exist_ok=True)
+            
+            if os.path.exists(self.index_file):
+                with open(self.index_file, 'r', encoding='utf-8') as f:
                     index = json.load(f)
                     print(f"当前索引包含 {len(index['podcasts'])} 个播客")
+                    print(f"索引文件位置: {self.index_file}")
             else:
                 index = {"podcasts": []}
-                print("创建新的索引文件")
+                print(f"创建新的索引文件: {self.index_file}")
             
             # 将新播客添加到列表开头
             index["podcasts"].insert(0, podcast_data)
             print(f"添加新播客: {podcast_data['id']}")
+            print(f"音频文件路径: {os.path.join(self.podcasts_dir, podcast_data['id'], 'podcast.mp3')}")
             
             # 保存更新后的索引
-            with open(index_file, 'w', encoding='utf-8') as f:
+            with open(self.index_file, 'w', encoding='utf-8') as f:
                 json.dump(index, f, ensure_ascii=False, indent=2)
             
-            print(f"✅ 索引文件已更新: {index_file}")
+            print(f"✅ 索引文件已更新: {self.index_file}")
             print(f"现在索引包含 {len(index['podcasts'])} 个播客")
             
         except Exception as e:
             print(f"更新索引文件失败: {e}")
+            import traceback
+            print(traceback.format_exc())
 
     async def generate_broadcast_script(self, summaries: List[Dict]) -> str:
         """生成单人播报稿"""
@@ -453,7 +458,7 @@ class PodcastGenerator:
 
 async def main():
     generator = PodcastGenerator()
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # 在开始时就生成时间戳
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
     # 1. 获取文章
     articles = generator.fetch_rss_articles()
@@ -500,6 +505,27 @@ async def main():
         'script_path': f'/podcasts/{timestamp}/script.txt'
     }
     generator.update_podcast_index(podcast_data)
+    
+    # 添加文件检查
+    script_file = os.path.join(podcast_dir, 'script.txt')
+    audio_file = os.path.join(podcast_dir, 'podcast.mp3')
+    index_file = generator.index_file
+    
+    print("\n文件检查:")
+    print(f"播客目录: {os.path.exists(podcast_dir)}")
+    print(f"文稿文件: {os.path.exists(script_file)}")
+    print(f"音频文件: {os.path.exists(audio_file)}")
+    print(f"索引文件: {os.path.exists(index_file)}")
+    
+    # 打印目录内容
+    if os.path.exists(generator.web_dir):
+        print("\n网站目录内容:")
+        for root, dirs, files in os.walk(generator.web_dir):
+            print(f"\n{root}:")
+            for d in dirs:
+                print(f"  📁 {d}")
+            for f in files:
+                print(f"  📄 {f}")
     
     print("\n处理完成!")
     print(f"文件已保存在: {os.path.join(generator.podcasts_dir, timestamp)}")
