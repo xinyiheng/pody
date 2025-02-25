@@ -2,7 +2,7 @@ name: Generate Podcast
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # 每天早上8点运行（UTC时间）
+    - cron: '0 1 * * *'  # 每天北京时间 9 点运行
   workflow_dispatch:      # 允许手动触发
 
 jobs:

@@ -32,4 +32,20 @@ ENV/
 
 # Project specific
 article_cache.json
+process_progress.json
+.env
+*.pyc
+
+# Virtual Environment
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Project specific
+article_cache.json
 process_progress.json 

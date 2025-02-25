@@ -13,7 +13,10 @@ import shutil
 class PodcastGenerator:
     def __init__(self):
         self.rss_url = "https://www.inoreader.com/stream/user/1005507650/tag/%E5%9B%BD%E5%86%85%E5%87%BA%E7%89%88%E5%95%86%E5%85%AC%E4%BC%97%E5%8F%B7"
-        self.api_key = "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"
+        # 从环境变量获取 API key
+        self.api_key = os.environ.get('API_KEY')
+        if not self.api_key:
+            raise ValueError("API_KEY environment variable is not set")
         self.api_base = "https://openrouter.ai/api/v1/chat/completions"
         self.cache_file = "article_cache.json"
         self.progress_file = "process_progress.json"
