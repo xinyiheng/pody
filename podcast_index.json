@@ -1,0 +1,20 @@
+{
+  "podcasts": [
+    {
+      "id": "20250225_111615",
+      "date": "2025-02-25",
+      "title": "出版电台播报 2025年02月25日",
+      "summary": "谋杀手段：用刑侦科学破解致命罪案 | 新书",
+      "audio_path": "/podcasts/20250225_111615/podcast.mp3",
+      "script_path": "/podcasts/20250225_111615/script.txt"
+    },
+    {
+      "id": "20250225_114406",
+      "date": "2025-02-25",
+      "title": "出版电台播报 2025年2月25日",
+      "summary": "《一九八四》与现代社会的隐私问题探讨",
+      "audio_path": "/podcasts/20250225_114406/podcast.mp3",
+      "script_path": "/podcasts/20250225_114406/script.txt"
+    }
+  ]
+}
