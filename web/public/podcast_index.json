@@ -1,0 +1,12 @@
+{
+  "podcasts": [
+    {
+      "id": "20250225_114406",
+      "date": "2025-02-25",
+      "title": "出版电台播报 2025年2月25日",
+      "summary": "《一九八四》与现代社会的隐私问题探讨",
+      "audio_path": "/podcasts/20250225_114406/podcast.mp3",
+      "script_path": "/podcasts/20250225_114406/script.txt"
+    }
+  ]
+} 

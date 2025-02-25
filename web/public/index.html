@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出版电台</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .podcast-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .podcast-content.expanded {
+            max-height: 2000px;
+        }
+        .script-content {
+            white-space: pre-wrap;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: white;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: #666;
+        }
+
+        .close-button:hover {
+            color: #000;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        /* 移除速度控制相关样式 */
+        .audio-container {
+            position: relative;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <h1 class="text-3xl font-bold mb-8 text-center">出版电台</h1>
+        <div id="podcast-list" class="space-y-6">
+            <!-- 播客列表将通过 JavaScript 动态加载 -->
+        </div>
+    </div>
+
+    <!-- 添加模态框 -->
+    <div id="scriptModal" class="modal">
+        <div class="modal-content">
+            <button class="close-button">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+            <h3 class="text-xl font-semibold mb-4" id="modalTitle"></h3>
+            <div id="modalContent" class="script-content text-gray-700"></div>
+        </div>
+    </div>
+
+    <template id="podcast-template">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="p-6">
+                <div class="mb-4">
+                    <h2 class="text-xl font-semibold"></h2>
+                </div>
+                <p class="text-gray-600 mb-4"></p>
+                <div class="space-y-4">
+                    <div class="audio-container">
+                        <audio controls class="w-full">
+                            <source type="audio/mpeg">
+                            您的浏览器不支持音频播放。
+                        </audio>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <button class="text-blue-500 hover:text-blue-700 flex items-center view-script">
+                            <span>查看文稿</span>
+                        </button>
+                        <div class="flex space-x-4">
+                            <button class="text-gray-500 hover:text-gray-700 share-btn">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        const modal = document.getElementById('scriptModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContent = document.getElementById('modalContent');
+
+        // 关闭模态框
+        document.querySelector('.close-button').addEventListener('click', () => {
+            modal.classList.remove('show');
+            document.body.classList.remove('modal-open');
+        });
+
+        // 点击模态框外部关闭
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+                document.body.classList.remove('modal-open');
+            }
+        });
+
+        async function loadPodcasts() {
+            try {
+                const response = await fetch('./podcast_index.json');
+                const data = await response.json();
+                const podcastList = document.getElementById('podcast-list');
+                const template = document.getElementById('podcast-template');
+
+                data.podcasts.forEach(async podcast => {
+                    const clone = template.content.cloneNode(true);
+                    
+                    clone.querySelector('h2').textContent = podcast.title;
+                    clone.querySelector('p').textContent = podcast.summary;
+                    clone.querySelector('audio source').src = '.' + podcast.audio_path;
+
+                    const container = document.createElement('div');
+                    container.appendChild(clone);
+                    const element = container.firstElementChild;
+
+                    // 加载文稿内容
+                    try {
+                        const scriptResponse = await fetch('.' + podcast.script_path);
+                        const scriptContent = await scriptResponse.text();
+                        
+                        element.querySelector('.view-script').addEventListener('click', () => {
+                            modalTitle.textContent = podcast.title;
+                            modalContent.textContent = scriptContent;
+                            modal.classList.add('show');
+                            document.body.classList.add('modal-open');
+                        });
+                    } catch (error) {
+                        console.error('加载文稿失败:', error);
+                    }
+
+                    // 分享功能
+                    element.querySelector('.share-btn').addEventListener('click', () => {
+                        if (navigator.share) {
+                            navigator.share({
+                                title: podcast.title,
+                                text: podcast.summary,
+                                url: window.location.href
+                            });
+                        } else {
+                            alert('您的浏览器不支持分享功能');
+                        }
+                    });
+
+                    podcastList.appendChild(element);
+                });
+            } catch (error) {
+                console.error('加载播客列表失败:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadPodcasts);
+    </script>
+</body>
+</html> 
