@@ -8,24 +8,52 @@ on:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    permissions:         # 添加权限设置
-      contents: write    # 允许写入仓库内容
+    permissions:         
+      contents: write    
     
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: gh-pages  # 首先检出 gh-pages 分支
+        path: gh-pages  # 将其检出到 gh-pages 目录
+        
+    - uses: actions/checkout@v2
+      with:
+        path: main  # 将主分支检出到 main 目录
     
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
+
+    # 添加缓存步骤
+    - name: Cache pip packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('main/**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
     
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r main/requirements.txt
+    
+    - name: Copy existing podcasts
+      run: |
+        if [ -d "gh-pages/podcasts" ]; then
+          mkdir -p main/web/public/podcasts
+          cp -r gh-pages/podcasts/* main/web/public/podcasts/
+        fi
+        if [ -f "gh-pages/podcast_index.json" ]; then
+          cp gh-pages/podcast_index.json main/web/public/
+        fi
     
     - name: Generate podcast
-      run: python scripts/generate_podcast.py
+      run: |
+        cd main
+        python scripts/generate_podcast.py
       env:
         API_KEY: ${{ secrets.API_KEY }}
         VOLC_ACCESS_TOKEN: ${{ secrets.VOLC_ACCESS_TOKEN }}
@@ -44,4 +72,5 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./web/public
+        publish_dir: ./main/web/public
+        keep_files: true  # 保留现有文件
