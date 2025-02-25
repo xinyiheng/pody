@@ -141,6 +141,11 @@ class PodcastGenerator:
                 json=payload,
                 timeout=60
             )
+            
+            print(f"完整请求头: {headers}")  # 不要在生产环境打印
+            print(f"响应状态码: {response.status_code}")
+            print(f"响应内容: {response.text}")
+            
             response.raise_for_status()
             script = response.json()["choices"][0]["message"]["content"]
             
@@ -160,23 +165,27 @@ class PodcastGenerator:
             print(f"\n播报稿已生成并保存到: {script_file}")
             return script
             
-        except Exception as e:
-            print(f"生成播报稿失败: {str(e)}")
-            import traceback
-            print(traceback.format_exc())
+        except requests.exceptions.RequestException as e:
+            print(f"API 请求失败: {str(e)}")
+            if hasattr(e.response, 'text'):
+                print(f"错误详情: {e.response.text}")
             return ""
 
     async def generate_audio(self, text: str, timestamp: str) -> str:
         """使用Edge TTS生成音频"""
         print("开始生成音频...")
         try:
+            # 确保目录存在
+            podcast_dir = os.path.join(self.podcasts_dir, timestamp)
+            if not os.path.exists(podcast_dir):
+                os.makedirs(podcast_dir)
+            
             communicate = edge_tts.Communicate(
                 text, 
                 "zh-CN-XiaoxiaoNeural",
                 rate="+50%"
             )
             
-            podcast_dir = os.path.join(self.podcasts_dir, timestamp)
             audio_file = os.path.join(podcast_dir, 'podcast.mp3')
             await communicate.save(audio_file)
             
@@ -451,6 +460,16 @@ async def main():
     if not script:
         print("生成播报稿失败")
         return
+    
+    # 确保播客目录存在
+    podcast_dir = os.path.join(generator.podcasts_dir, timestamp)
+    if not os.path.exists(podcast_dir):
+        os.makedirs(podcast_dir)
+    
+    # 保存文稿
+    script_file = os.path.join(podcast_dir, 'script.txt')
+    with open(script_file, 'w', encoding='utf-8') as f:
+        f.write(script)
     
     # 4. 生成音频
     audio_file = await generator.generate_audio(script, timestamp)
