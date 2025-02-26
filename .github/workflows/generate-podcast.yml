@@ -2,7 +2,7 @@ name: Generate Podcast
 
 on:
   schedule:
-    - cron: '*/30 22-23 * * *'  # 在 UTC 22:00-23:59 之间每30分钟运行一次
+    - cron: '*/60 22-23 * * *'  # 在 UTC 22:00-23:59 之间每30分钟运行一次
   workflow_dispatch:      # 允许手动触发
 
 jobs:
