@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250315_220130",
+      "date": "2025-03-15",
+      "title": "出版电台播报 2025年03月15日",
+      "summary": "关于智能体（AI Agent），不得不看的一篇总结",
+      "audio_path": "/podcasts/20250315_220130/podcast.mp3",
+      "script_path": "/podcasts/20250315_220130/script.txt"
+    },
+    {
       "id": "20250314_230123",
       "date": "2025-03-14",
       "title": "出版电台播报 2025年03月14日",
