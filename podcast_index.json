@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250330_230207",
+      "date": "2025-03-30",
+      "title": "出版电台播报 2025年03月30日",
+      "summary": "“活人感”越来越淡的时候，庆幸读到了这些书",
+      "audio_path": "/podcasts/20250330_230207/podcast.mp3",
+      "script_path": "/podcasts/20250330_230207/script.txt"
+    },
+    {
       "id": "20250330_220815",
       "date": "2025-03-30",
       "title": "出版电台播报 2025年03月30日",
@@ -391,14 +399,6 @@
       "summary": "央妈、协和、中外明星推荐的减肥法，不饿肚子也不累！",
       "audio_path": "/podcasts/20250305_220735/podcast.mp3",
       "script_path": "/podcasts/20250305_220735/script.txt"
-    },
-    {
-      "id": "20250304_230719",
-      "date": "2025-03-04",
-      "title": "出版电台播报 2025年03月04日",
-      "summary": "这样做，让优秀的人主动靠近你",
-      "audio_path": "/podcasts/20250304_230719/podcast.mp3",
-      "script_path": "/podcasts/20250304_230719/script.txt"
     }
   ]
 }
