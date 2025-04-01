@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250401_220229",
+      "date": "2025-04-01",
+      "title": "出版电台播报 2025年04月01日",
+      "summary": "读完这本书，才知道大脑应该这样“养”",
+      "audio_path": "/podcasts/20250401_220229/podcast.mp3",
+      "script_path": "/podcasts/20250401_220229/script.txt"
+    },
+    {
       "id": "20250331_230903",
       "date": "2025-03-31",
       "title": "出版电台播报 2025年03月31日",
@@ -391,14 +399,6 @@
       "summary": "抓狂！孩子每天有200多个为什么？这套书帮你轻松搞定！",
       "audio_path": "/podcasts/20250306_230810/podcast.mp3",
       "script_path": "/podcasts/20250306_230810/script.txt"
-    },
-    {
-      "id": "20250306_220201",
-      "date": "2025-03-06",
-      "title": "出版电台播报 2025年03月06日",
-      "summary": "排行榜No.1领衔，在这个群魔乱舞的时代，送你一根定心神针",
-      "audio_path": "/podcasts/20250306_220201/podcast.mp3",
-      "script_path": "/podcasts/20250306_220201/script.txt"
     }
   ]
 }
