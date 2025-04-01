@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250401_230846",
+      "date": "2025-04-01",
+      "title": "出版电台播报 2025年04月01日",
+      "summary": "读完这本书，才知道大脑应该这样“养”",
+      "audio_path": "/podcasts/20250401_230846/podcast.mp3",
+      "script_path": "/podcasts/20250401_230846/script.txt"
+    },
+    {
       "id": "20250401_220229",
       "date": "2025-04-01",
       "title": "出版电台播报 2025年04月01日",
@@ -391,14 +399,6 @@
       "summary": "限量预约｜对话《黄仁勋：英伟达之芯》作者，与ARK在新加坡解密AI「破晓时分」",
       "audio_path": "/podcasts/20250307_220119/podcast.mp3",
       "script_path": "/podcasts/20250307_220119/script.txt"
-    },
-    {
-      "id": "20250306_230810",
-      "date": "2025-03-06",
-      "title": "出版电台播报 2025年03月06日",
-      "summary": "抓狂！孩子每天有200多个为什么？这套书帮你轻松搞定！",
-      "audio_path": "/podcasts/20250306_230810/podcast.mp3",
-      "script_path": "/podcasts/20250306_230810/script.txt"
     }
   ]
 }
