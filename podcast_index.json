@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250402_230900",
+      "date": "2025-04-02",
+      "title": "出版电台播报 2025年04月02日",
+      "summary": "对话《黄仁勋：英伟达之芯》作者：传奇背后以及AI的下一步",
+      "audio_path": "/podcasts/20250402_230900/podcast.mp3",
+      "script_path": "/podcasts/20250402_230900/script.txt"
+    },
+    {
       "id": "20250402_220208",
       "date": "2025-04-02",
       "title": "出版电台播报 2025年04月02日",
@@ -391,14 +399,6 @@
       "summary": "强烈推荐女孩子们都去看看《孙子兵法》！",
       "audio_path": "/podcasts/20250308_220116/podcast.mp3",
       "script_path": "/podcasts/20250308_220116/script.txt"
-    },
-    {
-      "id": "20250307_230124",
-      "date": "2025-03-07",
-      "title": "出版电台播报 2025年03月07日",
-      "summary": "限量预约｜对话《黄仁勋：英伟达之芯》作者，与ARK在新加坡解密AI「破晓时分」",
-      "audio_path": "/podcasts/20250307_230124/podcast.mp3",
-      "script_path": "/podcasts/20250307_230124/script.txt"
     }
   ]
 }
