@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250404_230906",
+      "date": "2025-04-04",
+      "title": "出版电台播报 2025年04月04日",
+      "summary": "值得一读再读！8本好书，改变你今年的生活",
+      "audio_path": "/podcasts/20250404_230906/podcast.mp3",
+      "script_path": "/podcasts/20250404_230906/script.txt"
+    },
+    {
       "id": "20250404_220841",
       "date": "2025-04-04",
       "title": "出版电台播报 2025年04月04日",
@@ -391,14 +399,6 @@
       "summary": "不需要写很多，但要经常写",
       "audio_path": "/podcasts/20250310_220742/podcast.mp3",
       "script_path": "/podcasts/20250310_220742/script.txt"
-    },
-    {
-      "id": "20250309_230140",
-      "date": "2025-03-09",
-      "title": "出版电台播报 2025年03月09日",
-      "summary": "独家！对话复杂经济学奠基人布莱恩·阿瑟：关于AI时代的三个忠告",
-      "audio_path": "/podcasts/20250309_230140/podcast.mp3",
-      "script_path": "/podcasts/20250309_230140/script.txt"
     }
   ]
 }
