@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250406_220828",
+      "date": "2025-04-06",
+      "title": "出版电台播报 2025年04月06日",
+      "summary": "穿过“法国文学”的窄门，走进非洲法语文学的广阔天地",
+      "audio_path": "/podcasts/20250406_220828/podcast.mp3",
+      "script_path": "/podcasts/20250406_220828/script.txt"
+    },
+    {
       "id": "20250405_230836",
       "date": "2025-04-05",
       "title": "出版电台播报 2025年04月05日",
@@ -391,14 +399,6 @@
       "summary": "或许，我们都在追求这本书里的生活",
       "audio_path": "/podcasts/20250311_230753/podcast.mp3",
       "script_path": "/podcasts/20250311_230753/script.txt"
-    },
-    {
-      "id": "20250311_220121",
-      "date": "2025-03-11",
-      "title": "出版电台播报 2025年03月11日",
-      "summary": "或许，我们都在追求这本书里的生活",
-      "audio_path": "/podcasts/20250311_220121/podcast.mp3",
-      "script_path": "/podcasts/20250311_220121/script.txt"
     }
   ]
 }
