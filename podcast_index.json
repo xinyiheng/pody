@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250406_230233",
+      "date": "2025-04-06",
+      "title": "出版电台播报 2025年04月06日",
+      "summary": "穿过“法国文学”的窄门，走进非洲法语文学的广阔天地",
+      "audio_path": "/podcasts/20250406_230233/podcast.mp3",
+      "script_path": "/podcasts/20250406_230233/script.txt"
+    },
+    {
       "id": "20250406_220828",
       "date": "2025-04-06",
       "title": "出版电台播报 2025年04月06日",
@@ -391,14 +399,6 @@
       "summary": "【限时招募】一小时打造超级畅销书？“读客创意练习所”公开创意流水线的奥秘！",
       "audio_path": "/podcasts/20250312_230801/podcast.mp3",
       "script_path": "/podcasts/20250312_230801/script.txt"
-    },
-    {
-      "id": "20250311_230753",
-      "date": "2025-03-11",
-      "title": "出版电台播报 2025年03月11日",
-      "summary": "或许，我们都在追求这本书里的生活",
-      "audio_path": "/podcasts/20250311_230753/podcast.mp3",
-      "script_path": "/podcasts/20250311_230753/script.txt"
     }
   ]
 }
