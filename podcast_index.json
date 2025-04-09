@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250409_220921",
+      "date": "2025-04-09",
+      "title": "出版电台播报 2025年04月09日",
+      "summary": "解决问题时最重要的是“顺序”",
+      "audio_path": "/podcasts/20250409_220921/podcast.mp3",
+      "script_path": "/podcasts/20250409_220921/script.txt"
+    },
+    {
       "id": "20250408_230922",
       "date": "2025-04-08",
       "title": "出版电台播报 2025年04月08日",
@@ -391,14 +399,6 @@
       "summary": "关于智能体（AI Agent），不得不看的一篇总结",
       "audio_path": "/podcasts/20250315_220130/podcast.mp3",
       "script_path": "/podcasts/20250315_220130/script.txt"
-    },
-    {
-      "id": "20250314_230123",
-      "date": "2025-03-14",
-      "title": "出版电台播报 2025年03月14日",
-      "summary": "勇于自我宣传，让你的价值被看到",
-      "audio_path": "/podcasts/20250314_230123/podcast.mp3",
-      "script_path": "/podcasts/20250314_230123/script.txt"
     }
   ]
 }
