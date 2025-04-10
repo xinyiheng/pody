@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250410_220933",
+      "date": "2025-04-10",
+      "title": "出版电台播报 2025年04月10日",
+      "summary": "书单｜职场如战场，这几本书早读早受益",
+      "audio_path": "/podcasts/20250410_220933/podcast.mp3",
+      "script_path": "/podcasts/20250410_220933/script.txt"
+    },
+    {
       "id": "20250409_230936",
       "date": "2025-04-09",
       "title": "出版电台播报 2025年04月09日",
@@ -391,14 +399,6 @@
       "summary": "春日苦短，明天上班！",
       "audio_path": "/podcasts/20250316_220127/podcast.mp3",
       "script_path": "/podcasts/20250316_220127/script.txt"
-    },
-    {
-      "id": "20250315_230724",
-      "date": "2025-03-15",
-      "title": "出版电台播报 2025年03月15日",
-      "summary": "关于智能体（AI Agent），不得不看的一篇总结",
-      "audio_path": "/podcasts/20250315_230724/podcast.mp3",
-      "script_path": "/podcasts/20250315_230724/script.txt"
     }
   ]
 }
