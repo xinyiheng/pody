@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250412_220124",
+      "date": "2025-04-12",
+      "title": "出版电台播报 2025年04月12日",
+      "summary": "单日成交额破2000万！这个图书品牌在小红书经历了什么？",
+      "audio_path": "/podcasts/20250412_220124/podcast.mp3",
+      "script_path": "/podcasts/20250412_220124/script.txt"
+    },
+    {
       "id": "20250411_231001",
       "date": "2025-04-11",
       "title": "出版电台播报 2025年04月11日",
@@ -391,14 +399,6 @@
       "summary": "活动预告：“非洲法语文学译丛”新书发布会，法语文学界专家刘成富、袁筱一、施雪莹荟聚",
       "audio_path": "/podcasts/20250318_220807/podcast.mp3",
       "script_path": "/podcasts/20250318_220807/script.txt"
-    },
-    {
-      "id": "20250317_230812",
-      "date": "2025-03-17",
-      "title": "出版电台播报 2025年03月17日",
-      "summary": "大脑的性别差异从何而来？",
-      "audio_path": "/podcasts/20250317_230812/podcast.mp3",
-      "script_path": "/podcasts/20250317_230812/script.txt"
     }
   ]
 }
