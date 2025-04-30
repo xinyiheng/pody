@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250430_220839",
+      "date": "2025-04-30",
+      "title": "出版电台播报 2025年04月30日",
+      "summary": "33家童书品牌书单来了︱4月童书书单",
+      "audio_path": "/podcasts/20250430_220839/podcast.mp3",
+      "script_path": "/podcasts/20250430_220839/script.txt"
+    },
+    {
       "id": "20250429_230820",
       "date": "2025-04-29",
       "title": "出版电台播报 2025年04月29日",
@@ -391,14 +399,6 @@
       "summary": "豆瓣9.5分，这本书读到兴奋得头皮发麻！",
       "audio_path": "/podcasts/20250325_220752/podcast.mp3",
       "script_path": "/podcasts/20250325_220752/script.txt"
-    },
-    {
-      "id": "20250324_230803",
-      "date": "2025-03-24",
-      "title": "出版电台播报 2025年03月24日",
-      "summary": "南大社一周书讯（2025.03.24-03.30）",
-      "audio_path": "/podcasts/20250324_230803/podcast.mp3",
-      "script_path": "/podcasts/20250324_230803/script.txt"
     }
   ]
 }
