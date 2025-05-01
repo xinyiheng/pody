@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250501_220843",
+      "date": "2025-05-01",
+      "title": "出版电台播报 2025年05月01日",
+      "summary": "33家童书品牌书单来了︱4月童书书单",
+      "audio_path": "/podcasts/20250501_220843/podcast.mp3",
+      "script_path": "/podcasts/20250501_220843/script.txt"
+    },
+    {
       "id": "20250430_230849",
       "date": "2025-04-30",
       "title": "出版电台播报 2025年04月30日",
@@ -391,14 +399,6 @@
       "summary": "张春元｜学习时间设计和课堂教学目标",
       "audio_path": "/podcasts/20250326_220821/podcast.mp3",
       "script_path": "/podcasts/20250326_220821/script.txt"
-    },
-    {
-      "id": "20250325_230808",
-      "date": "2025-03-25",
-      "title": "出版电台播报 2025年03月25日",
-      "summary": "豆瓣9.5分，这本书读到兴奋得头皮发麻！",
-      "audio_path": "/podcasts/20250325_230808/podcast.mp3",
-      "script_path": "/podcasts/20250325_230808/script.txt"
     }
   ]
 }
