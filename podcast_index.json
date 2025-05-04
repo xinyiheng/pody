@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250504_230308",
+      "date": "2025-05-04",
+      "title": "出版电台播报 2025年05月04日",
+      "summary": "33家童书品牌书单来了︱4月童书书单",
+      "audio_path": "/podcasts/20250504_230308/podcast.mp3",
+      "script_path": "/podcasts/20250504_230308/script.txt"
+    },
+    {
       "id": "20250504_220825",
       "date": "2025-05-04",
       "title": "出版电台播报 2025年05月04日",
@@ -391,14 +399,6 @@
       "summary": "什么方法能击败选择困难症？",
       "audio_path": "/podcasts/20250329_230813/podcast.mp3",
       "script_path": "/podcasts/20250329_230813/script.txt"
-    },
-    {
-      "id": "20250329_220554",
-      "date": "2025-03-29",
-      "title": "出版电台播报 2025年03月29日",
-      "summary": "什么方法能击败选择困难症？",
-      "audio_path": "/podcasts/20250329_220554/podcast.mp3",
-      "script_path": "/podcasts/20250329_220554/script.txt"
     }
   ]
 }
