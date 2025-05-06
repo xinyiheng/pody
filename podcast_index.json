@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250506_230917",
+      "date": "2025-05-06",
+      "title": "出版电台播报 2025年05月06日",
+      "summary": "西北书城业态场景升级：创新，生存与发展的必选项！",
+      "audio_path": "/podcasts/20250506_230917/podcast.mp3",
+      "script_path": "/podcasts/20250506_230917/script.txt"
+    },
+    {
       "id": "20250506_220904",
       "date": "2025-05-06",
       "title": "出版电台播报 2025年05月06日",
@@ -391,14 +399,6 @@
       "summary": "过度分析反而让我们陷入决策瘫痪！",
       "audio_path": "/podcasts/20250331_230903/podcast.mp3",
       "script_path": "/podcasts/20250331_230903/script.txt"
-    },
-    {
-      "id": "20250331_220925",
-      "date": "2025-03-31",
-      "title": "出版电台播报 2025年03月31日",
-      "summary": "过度分析反而让我们陷入决策瘫痪！",
-      "audio_path": "/podcasts/20250331_220925/podcast.mp3",
-      "script_path": "/podcasts/20250331_220925/script.txt"
     }
   ]
 }
