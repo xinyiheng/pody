@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250508_231010",
+      "date": "2025-05-08",
+      "title": "出版电台播报 2025年05月08日",
+      "summary": "豆瓣9.1，这本书满足了我对科学的所有想象",
+      "audio_path": "/podcasts/20250508_231010/podcast.mp3",
+      "script_path": "/podcasts/20250508_231010/script.txt"
+    },
+    {
       "id": "20250508_220932",
       "date": "2025-05-08",
       "title": "出版电台播报 2025年05月08日",
@@ -391,14 +399,6 @@
       "summary": "对话《黄仁勋：英伟达之芯》作者：传奇背后以及AI的下一步",
       "audio_path": "/podcasts/20250402_230900/podcast.mp3",
       "script_path": "/podcasts/20250402_230900/script.txt"
-    },
-    {
-      "id": "20250402_220208",
-      "date": "2025-04-02",
-      "title": "出版电台播报 2025年04月02日",
-      "summary": "对话《黄仁勋：英伟达之芯》作者：传奇背后以及AI的下一步",
-      "audio_path": "/podcasts/20250402_220208/podcast.mp3",
-      "script_path": "/podcasts/20250402_220208/script.txt"
     }
   ]
 }
