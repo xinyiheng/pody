@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250510_220827",
+      "date": "2025-05-10",
+      "title": "出版电台播报 2025年05月10日",
+      "summary": "和兔宝一起分分类……",
+      "audio_path": "/podcasts/20250510_220827/podcast.mp3",
+      "script_path": "/podcasts/20250510_220827/script.txt"
+    },
+    {
       "id": "20250509_230913",
       "date": "2025-05-09",
       "title": "出版电台播报 2025年05月09日",
@@ -391,14 +399,6 @@
       "summary": "值得一读再读！8本好书，改变你今年的生活",
       "audio_path": "/podcasts/20250404_220841/podcast.mp3",
       "script_path": "/podcasts/20250404_220841/script.txt"
-    },
-    {
-      "id": "20250403_230214",
-      "date": "2025-04-03",
-      "title": "出版电台播报 2025年04月03日",
-      "summary": "必知！成为“超级个体”还是沦为“数字佃农”？AI时代生存指南",
-      "audio_path": "/podcasts/20250403_230214/podcast.mp3",
-      "script_path": "/podcasts/20250403_230214/script.txt"
     }
   ]
 }
