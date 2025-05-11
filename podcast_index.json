@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250511_220225",
+      "date": "2025-05-11",
+      "title": "出版电台播报 2025年05月11日",
+      "summary": "和兔宝一起分分类……",
+      "audio_path": "/podcasts/20250511_220225/podcast.mp3",
+      "script_path": "/podcasts/20250511_220225/script.txt"
+    },
+    {
       "id": "20250510_230906",
       "date": "2025-05-10",
       "title": "出版电台播报 2025年05月10日",
@@ -391,14 +399,6 @@
       "summary": "测一测你的“博尔赫斯人格”！领取主题海报、纪念牌",
       "audio_path": "/podcasts/20250405_220234/podcast.mp3",
       "script_path": "/podcasts/20250405_220234/script.txt"
-    },
-    {
-      "id": "20250404_230906",
-      "date": "2025-04-04",
-      "title": "出版电台播报 2025年04月04日",
-      "summary": "值得一读再读！8本好书，改变你今年的生活",
-      "audio_path": "/podcasts/20250404_230906/podcast.mp3",
-      "script_path": "/podcasts/20250404_230906/script.txt"
     }
   ]
 }
