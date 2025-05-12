@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250512_220958",
+      "date": "2025-05-12",
+      "title": "出版电台播报 2025年05月12日",
+      "summary": "日韩文学为何屡屡登国际畅销书榜单？",
+      "audio_path": "/podcasts/20250512_220958/podcast.mp3",
+      "script_path": "/podcasts/20250512_220958/script.txt"
+    },
+    {
       "id": "20250511_230922",
       "date": "2025-05-11",
       "title": "出版电台播报 2025年05月11日",
@@ -391,14 +399,6 @@
       "summary": "穿过“法国文学”的窄门，走进非洲法语文学的广阔天地",
       "audio_path": "/podcasts/20250406_220828/podcast.mp3",
       "script_path": "/podcasts/20250406_220828/script.txt"
-    },
-    {
-      "id": "20250405_230836",
-      "date": "2025-04-05",
-      "title": "出版电台播报 2025年04月05日",
-      "summary": "测一测你的“博尔赫斯人格”！领取主题海报、纪念牌",
-      "audio_path": "/podcasts/20250405_230836/podcast.mp3",
-      "script_path": "/podcasts/20250405_230836/script.txt"
     }
   ]
 }
