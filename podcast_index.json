@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250512_230956",
+      "date": "2025-05-12",
+      "title": "出版电台播报 2025年05月12日",
+      "summary": "日韩文学为何屡屡登国际畅销书榜单？",
+      "audio_path": "/podcasts/20250512_230956/podcast.mp3",
+      "script_path": "/podcasts/20250512_230956/script.txt"
+    },
+    {
       "id": "20250512_220958",
       "date": "2025-05-12",
       "title": "出版电台播报 2025年05月12日",
@@ -391,14 +399,6 @@
       "summary": "穿过“法国文学”的窄门，走进非洲法语文学的广阔天地",
       "audio_path": "/podcasts/20250406_230233/podcast.mp3",
       "script_path": "/podcasts/20250406_230233/script.txt"
-    },
-    {
-      "id": "20250406_220828",
-      "date": "2025-04-06",
-      "title": "出版电台播报 2025年04月06日",
-      "summary": "穿过“法国文学”的窄门，走进非洲法语文学的广阔天地",
-      "audio_path": "/podcasts/20250406_220828/podcast.mp3",
-      "script_path": "/podcasts/20250406_220828/script.txt"
     }
   ]
 }
