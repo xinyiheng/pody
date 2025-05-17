@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250517_230945",
+      "date": "2025-05-17",
+      "title": "出版电台播报 2025年05月17日",
+      "summary": "简装书退市，美国廉价纸书时代即将落幕？",
+      "audio_path": "/podcasts/20250517_230945/podcast.mp3",
+      "script_path": "/podcasts/20250517_230945/script.txt"
+    },
+    {
       "id": "20250517_220315",
       "date": "2025-05-17",
       "title": "出版电台播报 2025年05月17日",
@@ -391,14 +399,6 @@
       "summary": "决策制定是艺术、手艺，还是科学？",
       "audio_path": "/podcasts/20250411_231001/podcast.mp3",
       "script_path": "/podcasts/20250411_231001/script.txt"
-    },
-    {
-      "id": "20250411_220305",
-      "date": "2025-04-11",
-      "title": "出版电台播报 2025年04月11日",
-      "summary": "决策制定是艺术、手艺，还是科学？",
-      "audio_path": "/podcasts/20250411_220305/podcast.mp3",
-      "script_path": "/podcasts/20250411_220305/script.txt"
     }
   ]
 }
