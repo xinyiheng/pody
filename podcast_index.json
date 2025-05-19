@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250519_231026",
+      "date": "2025-05-19",
+      "title": "出版电台播报 2025年05月19日",
+      "summary": "简装书退市，美国廉价纸书时代即将落幕？",
+      "audio_path": "/podcasts/20250519_231026/podcast.mp3",
+      "script_path": "/podcasts/20250519_231026/script.txt"
+    },
+    {
       "id": "20250519_221029",
       "date": "2025-05-19",
       "title": "出版电台播报 2025年05月19日",
@@ -391,14 +399,6 @@
       "summary": "不变的只有变化！面向未来10年，读大思考的书，做有韧性的行动者",
       "audio_path": "/podcasts/20250413_230832/podcast.mp3",
       "script_path": "/podcasts/20250413_230832/script.txt"
-    },
-    {
-      "id": "20250413_220749",
-      "date": "2025-04-13",
-      "title": "出版电台播报 2025年04月13日",
-      "summary": "不变的只有变化！面向未来10年，读大思考的书，做有韧性的行动者",
-      "audio_path": "/podcasts/20250413_220749/podcast.mp3",
-      "script_path": "/podcasts/20250413_220749/script.txt"
     }
   ]
 }
