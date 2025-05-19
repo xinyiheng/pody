@@ -1,6 +1,14 @@
 {
   "podcasts": [
     {
+      "id": "20250519_221029",
+      "date": "2025-05-19",
+      "title": "出版电台播报 2025年05月19日",
+      "summary": "简装书退市，美国廉价纸书时代即将落幕？",
+      "audio_path": "/podcasts/20250519_221029/podcast.mp3",
+      "script_path": "/podcasts/20250519_221029/script.txt"
+    },
+    {
       "id": "20250518_230959",
       "date": "2025-05-18",
       "title": "出版电台播报 2025年05月18日",
@@ -391,14 +399,6 @@
       "summary": "不变的只有变化！面向未来10年，读大思考的书，做有韧性的行动者",
       "audio_path": "/podcasts/20250413_220749/podcast.mp3",
       "script_path": "/podcasts/20250413_220749/script.txt"
-    },
-    {
-      "id": "20250412_230745",
-      "date": "2025-04-12",
-      "title": "出版电台播报 2025年04月12日",
-      "summary": "单日成交额破2000万！这个图书品牌在小红书经历了什么？",
-      "audio_path": "/podcasts/20250412_230745/podcast.mp3",
-      "script_path": "/podcasts/20250412_230745/script.txt"
     }
   ]
 }
